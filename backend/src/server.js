@@ -3,6 +3,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import errorHandler from 'middleware-http-errors';
 
+import { getRoster, createNewEmployee, setEmployeeAvailability } from './roster';
+
 
 // Set up web app
 const app = express();
@@ -39,4 +41,18 @@ app.get('/', (req, res) => {
 
 app.get('/test', (req, res) => {
   res.send('test route');
+})
+
+app.get('/roster', (req, res) => {
+  return res.json(getRoster());
+})
+
+app.post('/roster/adduser', (req, res) => {
+  const { name } = req.body;
+  return res.json(createNewEmployee(name));
+})
+
+app.put('/user/setavailability', (req, res) => {
+  const { name, availabilities } = req.body;
+  return res.json(setEmployeeAvailability(name, availabilities));
 })
