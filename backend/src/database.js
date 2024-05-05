@@ -1,7 +1,5 @@
 let data = {
-  employees: {
-    
-  }
+  employees: {}
 }
 
 const getData = () => {

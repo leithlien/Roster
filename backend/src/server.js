@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import errorHandler from 'middleware-http-errors';
 
-import { getRoster, createNewEmployee, setEmployeeAvailability } from './roster';
+import { getRoster, createNewEmployee, setEmployeeAvailability } from './roster.js';
 
 
 // Set up web app

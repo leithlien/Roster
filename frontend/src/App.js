@@ -1,32 +1,49 @@
-import logo from './logo.svg';
 import axios from 'axios';
 import React from 'react';
 import './App.css';
+import Button from '@mui/material/Button';
 
 function App() {
-  axios.get('http://localhost:3000/')
-    .then(res => { console.log(res.data) });
+  const [roster, setRoster] = React.useState({});
 
-  axios.get('http://localhost:3000/test')
-    .then(res => { console.log(res.data) });
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const roster = await axios.get('http://localhost:3000/roster');
+      setRoster(roster.data);
+    }
+    fetchData();
+  }, [])
+
+  React.useEffect(() => {
+    console.log(roster);
+  }, [roster])
+
+  const handleAddEmployee = async () => {
+    
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button>
+      {
+        Object.entries(roster.employees).forEach(([user, days]) => {
+          <>
+            <p><b>{user}</b></p> <br />
+          </>
+          Object.entries(days).forEach(([day, periods]) => {
+            Object.entries(periods).forEach(([period, val]) => {
+              {
+                val && (
+                  <>
+                    {day} {period} <br />
+                  </>
+                )
+              }
+            })
+          })
+        })
+      }
+    </>
   );
 }
 

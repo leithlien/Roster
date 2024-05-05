@@ -1,10 +1,11 @@
-import { getData, setData } from "./database"
+import { getData, setData } from "./database.js"
 import HTTPError from 'http-errors';
 
 const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const periods = ['early', 'mid', 'late']
 
 const getRoster = () => {
+  console.log(getData());
   return getData();
 }
 
