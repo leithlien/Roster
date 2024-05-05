@@ -2,6 +2,48 @@
 
 ### Backend
 
+#### Iteration 1
+<table>
+  <tr>
+    <td><code>roster/info</code><br /><br />Provides the details of the roster.</td>
+    <td>GET</td>
+    <td><b>Query Parameters:</b><br /><code>( )</code><br /><br /><b>Return type if no error:</b><br /><code>{ rosterId, rosterName, owner, members, roster }</code></td>
+    <td>
+      N/A
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>roster/add</code><br /><br />Adds a named person to the roster.</td>
+    <td>POST</td>
+    <td><b>Body Parameters:</b><br /><code>( name )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
+    <td>
+      <b>400 Error</b> when:
+      <ul>
+        <li><code>name</code> is an empty string</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>user/setavailability</code><br /><br />Given a <code>name</code> set user's availabilities to work.</td>
+    <td>PUT</td>
+    <td><b>Body Parameters:</b><br /><code>( name )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
+    <td>
+      <b>400 Error</b> when:
+      <ul>
+        <li><code>name</code> does not refer to a valid user</li>
+      </ul>
+    </td>
+  </tr>
+
+</table>
+
+Assumptions:
+ * All user's names are unique
+
+#### Iteration 2
+
 <table>
   <tr>
     <th>Name & Description</th>
