@@ -25,7 +25,7 @@ const createNewEmployee = ( name ) => {
     })
   });
 
-  data.employees.name = newEmployee;
+  data.employees[name] = newEmployee;
 
   setData(data);
 }

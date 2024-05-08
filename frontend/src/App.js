@@ -19,29 +19,35 @@ function App() {
   }, [roster])
 
   const handleAddEmployee = async () => {
-    
+    await axios.post('http://localhost:3000/roster/adduser',
+      {
+        name: 'john'
+      }
+    )
   }
 
   return (
     <>
       <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button>
       {
-        Object.entries(roster.employees).forEach(([user, days]) => {
-          <>
-            <p><b>{user}</b></p> <br />
-          </>
-          Object.entries(days).forEach(([day, periods]) => {
-            Object.entries(periods).forEach(([period, val]) => {
-              {
-                val && (
-                  <>
-                    {day} {period} <br />
-                  </>
-                )
-              }
+        Object.keys(roster).length !== 0 && (
+          Object.entries(roster.employees).forEach(([user, days]) => {
+            <>
+              <p><b>{user}</b></p> <br />
+            </>
+            Object.entries(days).forEach(([day, periods]) => {
+              Object.entries(periods).forEach(([period, val]) => {
+                {
+                  val && (
+                    <>
+                      {day} {period} <br />
+                    </>
+                  )
+                }
+              })
             })
           })
-        })
+        )
       }
     </>
   );
