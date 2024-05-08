@@ -21,7 +21,7 @@ const createNewEmployee = ( name ) => {
   days.forEach(d => {
     newEmployee[d] = {};
     periods.forEach(p => {
-      newEmployee[d][p] = false;
+      newEmployee[d][p] = true;
     })
   });
 

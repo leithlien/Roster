@@ -4,8 +4,7 @@
     "express": "^4.19.2",
     "http-errors": "^2.0.0",
     "middleware-http-errors": "^0.1.2",
-    "morgan": "^1.10.0",
-    "uuid": "^9.0.1"
+    "morgan": "^1.10.0"
   },
   "type": "module",
   "scripts": {

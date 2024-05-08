@@ -29,26 +29,27 @@ function App() {
   return (
     <>
       <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button>
+
       {
-        Object.keys(roster).length !== 0 && (
-          Object.entries(roster.employees).forEach(([user, days]) => {
-            <>
-              <p><b>{user}</b></p> <br />
-            </>
-            Object.entries(days).forEach(([day, periods]) => {
-              Object.entries(periods).forEach(([period, val]) => {
-                {
-                  val && (
-                    <>
-                      {day} {period} <br />
-                    </>
-                  )
-                }
-              })
-            })
-          })
+        Object.keys(roster).length > 0 && (
+          Object.entries(roster.employees).map(([name, days]) => (
+            <div key={name}>
+              {name}
+              {
+                Object.entries(days).map(([day, periods]) => (
+                  Object.entries(periods).map(([period, val]) => (
+                      val && (
+                        <div key={period}>{day} {period}</div>
+                      )
+                  ))
+                ))
+              }
+            </div>
+          ))
         )
       }
+
+
     </>
   );
 }
