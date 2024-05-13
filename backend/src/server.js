@@ -5,6 +5,7 @@ import errorHandler from 'middleware-http-errors';
 
 import { getRoster, createNewEmployee, setEmployeeAvailability } from './roster.js';
 import { clearData } from './database.js';
+import { solveFlow } from './flow.js';
 
 // Set up web app
 const app = express();
@@ -59,4 +60,8 @@ app.put('/user/setavailability', (req, res) => {
 
 app.delete('/reset', (req, res) => {
   return res.json(clearData());
+})
+
+app.get('/roster/solve', (req, res) => {
+  return res.json(solveFlow());
 })

@@ -49,6 +49,11 @@ function App() {
     setToggle(!toggleAvailabilities);
   }
 
+  const solveRoster = async () => {
+    const data = await axios.get('http://localhost:3000/roster/solve');
+    fetchData();
+  }
+
   return (
     <>
       {
@@ -90,7 +95,8 @@ function App() {
                 ))
               }
             </div>
-
+            
+            <Button variant="contained" onClick={solveRoster}>Solve</Button>
             {
               toggleAvailabilities && (
                 <>

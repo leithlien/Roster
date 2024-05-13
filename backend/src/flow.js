@@ -3,7 +3,7 @@ import { createNewEmployee } from "./roster.js"
 
 const INF = 999;
 
-const createGraph = () => {
+const solveFlow = () => {
   const data = getData();
   const graph = {};
   const source = {};
@@ -23,61 +23,16 @@ const createGraph = () => {
 
   console.log(graph);
   const res = fordFulkerson(graph, 'source', 'sink');
-  console.log(res);
-}
 
-let data = {
-  employees: {
-    adam: {
-      'mon-early': true,
-      'mon-mid': true,
-      'mon-late': false,
-      'tue-early': false,
-      'tue-mid': false,
-      'tue-late': false,
-      'wed-early': false,
-      'wed-mid': false,
-      'wed-late': false,
-      'thu-early': false,
-      'thu-mid': false,
-      'thu-late': false,
-      'fri-early': false,
-      'fri-mid': false,
-      'fri-late': false,
-      'sat-early': false,
-      'sat-mid': false,
-      'sat-late': false,
-      'sun-early': false,
-      'sun-mid': false,
-      'sun-late': false,
-    },
-    ben: {
-      'mon-early': false,
-      'mon-mid': true,
-      'mon-late': false,
-      'tue-early': false,
-      'tue-mid': false,
-      'tue-late': false,
-      'wed-early': false,
-      'wed-mid': false,
-      'wed-late': false,
-      'thu-early': false,
-      'thu-mid': false,
-      'thu-late': false,
-      'fri-early': false,
-      'fri-mid': false,
-      'fri-late': false,
-      'sat-early': false,
-      'sat-mid': false,
-      'sat-late': false,
-      'sun-early': false,
-      'sun-mid': false,
-      'sun-late': false,
+  res.matching.forEach(([name, period]) => {
+    data.roster[period] = [];
+    if (period !== 'sink' && name !== 'source') {
+      data.roster[period].push(name);
     }
-  }
+  })
+
+  setData(data);
 }
-setData(data);
-createGraph();
 
 function fordFulkerson(graph, source, sink) {
   const residualCapacity = new Map();
@@ -149,3 +104,5 @@ function fordFulkerson(graph, source, sink) {
 
   return { flow, matching }; // Return both flow and matching
 }
+
+export { solveFlow };
