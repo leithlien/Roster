@@ -5,8 +5,7 @@
     "http-errors": "^2.0.0",
     "jest": "^29.7.0",
     "middleware-http-errors": "^0.1.2",
-    "morgan": "^1.10.0",
-    "uuid": "^9.0.1"
+    "morgan": "^1.10.0"
   },
   "type": "module",
   "scripts": {
