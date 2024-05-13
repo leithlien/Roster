@@ -62,10 +62,11 @@ function App() {
                 periods.map(p => (
                   <div key={p} className='roster-cell'>
                     {`${d}-${p}`}
+                    {/* name rendering */}
                     { 
                       Object.keys(roster.employees).map(name => (
                         roster.employees[name][`${d}-${p}`] && (
-                          {name}
+                          <p>{name}</p>
                         )
                       ))
                     }
