@@ -82,10 +82,8 @@ function App() {
                           {`${d}-${p}`}
                           {/* name rendering */}
                           { 
-                            Object.keys(roster.employees).map(name => (
-                              roster.employees[name][`${d}-${p}`] && (
-                                <p key={name}>{name}</p>
-                              )
+                            roster.roster[`${d}-${p}`].map(n => (
+                              <p key={n}>{n}</p>
                             ))
                           }
                         </div>

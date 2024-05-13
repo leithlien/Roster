@@ -23,10 +23,11 @@ const solveFlow = () => {
 
   console.log(graph);
   const res = fordFulkerson(graph, 'source', 'sink');
+  console.log(res.matching);
 
   res.matching.forEach(([name, period]) => {
     data.roster[period] = [];
-    if (period !== 'sink' && name !== 'source') {
+    if (!(name === 'source' || period === 'sink')) {
       data.roster[period].push(name);
     }
   })
