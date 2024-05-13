@@ -10,4 +10,10 @@ const setData = (newData) => {
   data = newData;
 }
 
-export { getData, setData };
+const clearData = () => {
+  data = {
+    employees: {}
+  }
+}
+
+export { getData, setData, clearData };

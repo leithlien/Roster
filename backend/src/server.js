@@ -4,7 +4,7 @@ import cors from 'cors';
 import errorHandler from 'middleware-http-errors';
 
 import { getRoster, createNewEmployee, setEmployeeAvailability } from './roster.js';
-
+import { clearData } from './database.js';
 
 // Set up web app
 const app = express();
@@ -55,4 +55,8 @@ app.post('/roster/adduser', (req, res) => {
 app.put('/user/setavailability', (req, res) => {
   const { name, availabilities } = req.body;
   return res.json(setEmployeeAvailability(name, availabilities));
+})
+
+app.delete('/reset', (req, res) => {
+  return res.json(clearData());
 })

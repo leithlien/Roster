@@ -19,9 +19,9 @@ const createNewEmployee = ( name ) => {
   const newEmployee = {};
 
   days.forEach(d => {
-    newEmployee[d] = {};
     periods.forEach(p => {
-      newEmployee[d][p] = false;
+      const periodName = `${d}-${p}`
+      newEmployee[periodName] = false;
     })
   });
 

@@ -1,41 +1,50 @@
 data = {
   employees: {
     adam: {
-      mon: {
-        early: false,
-        mid: false,
-        late: true,
-      },
-      tue: {
-        early: false,
-        mid: false,
-        late: true,
-      },
-      wed: {
-        early: false,
-        mid: false,
-        late: true,
-      },
-      thu: {
-        early: false,
-        mid: false,
-        late: true,
-      },
-      fri: {
-        early: false,
-        mid: false,
-        late: true,
-      },
-      sat: {
-        early: false,
-        mid: false,
-        late: true,
-      },
-      sun: {
-        early: false,
-        mid: false,
-        late: true,
-      }
+      mon-early: false,
+      mon-mid: false,
+      mon-late: false,
+      tue-early: false,
+      tue-mid: false,
+      tue-late: false,
+      wed-early: false,
+      wed-mid: false,
+      wed-late: false,
+      thu-early: false
+      thu-mid: false,
+      thu-late: false,
+      fri-early: false,
+      fri-mid: false,
+      fri-late: false,
+      sat-early: false,
+      sat-mid: false,
+      sat-late: false,
+      sun-early: false,
+      sun-mid: false,
+      sun-late: false,
+    },
+    ben: {
+      'mon-early': false,
+      'mon-mid': true,
+      'mon-late': false,
+      'tue-early': false,
+      'tue-mid': false,
+      'tue-late': false,
+      'wed-early': false,
+      'wed-mid': false,
+      'wed-late': false,
+      'thu-early': false,
+      'thu-mid': false,
+      'thu-late': false,
+      'fri-early': false,
+      'fri-mid': false,
+      'fri-late': false,
+      'sat-early': false,
+      'sat-mid': false,
+      'sat-late': false,
+      'sun-early': false,
+      'sun-mid': false,
+      'sun-late': false,
     }
   }
 }
