@@ -2,10 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import './App.css';
 import Button from '@mui/material/Button';
+import Availabilities from './Availabilities';
 
 function App() {
   const [roster, setRoster] = React.useState(null);
   const [name, setName] = React.useState('');
+  const [toggleAvailabilities, setToggle] = React.useState(false);
 
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   const periods = ['early', 'mid', 'late']
@@ -17,7 +19,7 @@ function App() {
 
   React.useEffect(() => {
     fetchData();
-  }, [])
+  }, [toggleAvailabilities])
 
   React.useEffect(() => {
     console.log(roster);
@@ -41,6 +43,12 @@ function App() {
     fetchData();
   }
 
+  const handleToggleAvailabilities = (name) => {
+    console.log('toggle')
+    setName(name);
+    setToggle(!toggleAvailabilities);
+  }
+
   return (
     <>
       {
@@ -54,7 +62,7 @@ function App() {
             <div className='name-buttons'>
               {
                 Object.keys(roster.employees).map(name => (
-                  <Button key={name} variant="contained" onClick={null}>{name}</Button>
+                  <Button key={name} variant="contained" onClick={() => { handleToggleAvailabilities(name) }}>{name}</Button>
                 ))
               }
             </div>
@@ -82,6 +90,14 @@ function App() {
                 ))
               }
             </div>
+
+            {
+              toggleAvailabilities && (
+                <>
+                  <Availabilities setToggle={setToggle} name={name} />
+                </>
+              )
+            }
           </>
         )
       }

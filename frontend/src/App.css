@@ -34,3 +34,27 @@
   border: 1px solid black;
   padding: 10px;
 }
+
+.overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.overlay-container {
+  display: flex;
+  background-color: white;
+  width: 1200px;
+  height: 500px;
+}
+
+.toggle-container {
+  width: 200px;
+}
