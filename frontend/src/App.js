@@ -4,7 +4,7 @@ import './App.css';
 import Button from '@mui/material/Button';
 
 function App() {
-  const [roster, setRoster] = React.useState({employees: {}});
+  const [roster, setRoster] = React.useState(null);
   const [name, setName] = React.useState('');
 
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -43,40 +43,49 @@ function App() {
 
   return (
     <>
-      <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button>
-      <input value={name} onChange={handleNameChange} /> <br />
-      <Button variant="contained" onClick={handleReset}>Reset</Button>
-      <div className='name-buttons'>
-        {
-          Object.keys(roster.employees).map(name => (
-            <Button variant="contained" onClick={null}>{name}</Button>
-          ))
-        }
-      </div>
-      <div className='roster-container'>
-        {
-          days.map(d => (
-            <div key={d} className='roster-column'>
-              {d}
+      {
+        roster === null ? (
+          <p>loading...</p>
+        ) : (
+          <>
+            <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button>
+            <input value={name} onChange={handleNameChange} /> <br />
+            <Button variant="contained" onClick={handleReset}>Reset</Button>
+            <div className='name-buttons'>
               {
-                periods.map(p => (
-                  <div key={p} className='roster-cell'>
-                    {`${d}-${p}`}
-                    {/* name rendering */}
-                    { 
-                      Object.keys(roster.employees).map(name => (
-                        roster.employees[name][`${d}-${p}`] && (
-                          <p>{name}</p>
-                        )
+                Object.keys(roster.employees).map(name => (
+                  <Button key={name} variant="contained" onClick={null}>{name}</Button>
+                ))
+              }
+            </div>
+            <div className='roster-container'>
+              {
+                days.map(d => (
+                  <div key={d} className='roster-column'>
+                    {d}
+                    {
+                      periods.map(p => (
+                        <div key={p} className='roster-cell'>
+                          {`${d}-${p}`}
+                          {/* name rendering */}
+                          { 
+                            Object.keys(roster.employees).map(name => (
+                              roster.employees[name][`${d}-${p}`] && (
+                                <p key={name}>{name}</p>
+                              )
+                            ))
+                          }
+                        </div>
                       ))
                     }
                   </div>
                 ))
               }
             </div>
-          ))
-        }
-      </div>
+          </>
+        )
+      }
+      
     </>
   );
 }
