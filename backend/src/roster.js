@@ -5,7 +5,6 @@ const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const periods = ['early', 'mid', 'late']
 
 const getRoster = () => {
-  console.log(getData());
   return getData();
 }
 
@@ -42,4 +41,8 @@ const setEmployeeAvailability = ( name, availabilities ) => {
   setData(data);
 }
 
-export { getRoster, createNewEmployee, setEmployeeAvailability };
+const setShiftRequirements = ( requirements ) => {
+  return;
+}
+
+export { getRoster, createNewEmployee, setEmployeeAvailability, setShiftRequirements };

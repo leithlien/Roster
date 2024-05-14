@@ -1,20 +1,19 @@
 # Roster
 
-### Backend
-
-#### Iteration 1
+### Iteration 1
+##### Backend
 <table>
   <tr>
-    <td><code>roster/info</code><br /><br />Provides the details of the roster.</td>
+    <td><code>roster</code><br /><br />Provides all details of the roster.</td>
     <td>GET</td>
-    <td><b>Query Parameters:</b><br /><code>( )</code><br /><br /><b>Return type if no error:</b><br /><code>{ rosterId, rosterName, owner, members, roster }</code></td>
+    <td><b>Query Parameters:</b><br /><code>( )</code><br /><br /><b>Return type if no error:</b><br /><code>{ data }</code></td>
     <td>
       N/A
     </td>
   </tr>
 
   <tr>
-    <td><code>roster/add</code><br /><br />Adds a named person to the roster.</td>
+    <td><code>roster/adduser</code><br /><br />Adds a named person to the roster.</td>
     <td>POST</td>
     <td><b>Body Parameters:</b><br /><code>( name )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
     <td>
@@ -28,7 +27,7 @@
   <tr>
     <td><code>user/setavailability</code><br /><br />Given a <code>name</code> set user's availabilities to work.</td>
     <td>PUT</td>
-    <td><b>Body Parameters:</b><br /><code>( name )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
+    <td><b>Body Parameters:</b><br /><code>( name, availabilities )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
     <td>
       <b>400 Error</b> when:
       <ul>
@@ -37,12 +36,58 @@
     </td>
   </tr>
 
+  <tr>
+    <td><code>roster/setrequirements</code><br /><br />Set the rosters requirements (employees needed for each shift).</td>
+    <td>PUT</td>
+    <td><b>Body Parameters:</b><br /><code>( requirements )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
+    <td>
+      N/A
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>roster/solve</code><br /><br />Solve the roster using info from the database.</td>
+    <td>GET</td>
+    <td><b>Body Parameters:</b><br /><code>( )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
+    <td>
+      N/A
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>reset</code><br /><br />Reset the database/roster.</td>
+    <td>DELETE</td>
+    <td><b>Query Parameters:</b><br /><code>( )</code><br /><br /><b>Return type if no error:</b><br /><code>{ }</code></td>
+    <td>
+      N/A
+    </td>
+  </tr>
 </table>
 
 Assumptions:
  * All user's names are unique
 
-#### Iteration 2
+##### Frontend
+
+Feature Set 1.1: Roster
+- 7 x 3 grid (days x periods) which displays the names of who is working the shift.
+
+Feature Set 1.2: Interactive UI
+- Button and input to add a named person to the roster.
+- Button that opens up a modal to set the number of workers required per shift:
+  - Prepopulated with the current values.
+  - Same grid as 1.1, except with an input that takes in a number.
+  - Confirmation and cancelation button.
+- Button that opens up a modal to change a persons availabilities:
+  - Prepopulated with their current availabilities.
+  - Same grid as 1.1, except with a checkbox that indicates availability.
+  - An input that takes in a number indicating how many shifts they would like to work.
+  - Confirmation and cancelation button.
+- Solve button that creates/solves/updates the roster.
+- Reset button that clears the roster/database.
+
+
+### Iteration 2
 
 <table>
   <tr>

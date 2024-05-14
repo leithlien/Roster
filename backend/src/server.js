@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import errorHandler from 'middleware-http-errors';
 
-import { getRoster, createNewEmployee, setEmployeeAvailability } from './roster.js';
+import { getRoster, createNewEmployee, setEmployeeAvailability, setShiftRequirements } from './roster.js';
 import { clearData } from './database.js';
 import { solveFlow } from './flow.js';
 
@@ -35,15 +35,6 @@ process.on('SIGINT', () => {
 });
 
 
-app.get('/', (req, res) => {
-  console.log('backend root request')
-  res.send('hello world');
-})
-
-app.get('/test', (req, res) => {
-  res.send('test route');
-})
-
 app.get('/roster', (req, res) => {
   return res.json(getRoster());
 })
@@ -58,10 +49,15 @@ app.put('/user/setavailability', (req, res) => {
   return res.json(setEmployeeAvailability(name, availabilities));
 })
 
-app.delete('/reset', (req, res) => {
-  return res.json(clearData());
+app.put('roster/setrequirements', (req, res) => {
+  const { requirements } = req.body;
+  return res.json(setShiftRequirements(requirements));
 })
 
 app.get('/roster/solve', (req, res) => {
   return res.json(solveFlow());
+})
+
+app.delete('/reset', (req, res) => {
+  return res.json(clearData());
 })

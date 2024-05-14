@@ -9,7 +9,7 @@ const solveFlow = () => {
   const source = {};
 
   for (const [name, periods] of Object.entries(data.employees)) {
-    source[name] = 1;
+    source[name] = INF;
     const adjList = {};
     for (const [period, value] of Object.entries(periods)) {
       if (value) {
@@ -21,9 +21,7 @@ const solveFlow = () => {
   }
   graph['source'] = source;
 
-  console.log(graph);
   const res = fordFulkerson(graph, 'source', 'sink');
-  console.log(res.matching);
 
   res.matching.forEach(([name, period]) => {
     data.roster[period] = [];
