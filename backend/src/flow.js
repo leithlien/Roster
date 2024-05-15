@@ -1,7 +1,4 @@
 import { getData, setData } from "./database.js"
-import { createNewEmployee } from "./roster.js"
-
-const INF = 999;
 
 const solveFlow = () => {
   const data = getData();
@@ -14,7 +11,7 @@ const solveFlow = () => {
     for (const [period, value] of Object.entries(employeeData.availabilities)) {
       if (value) {
         adjList[period] = 1;
-        graph[period] = { 'sink': data.rosterRequirements[period] };
+        graph[period] = { 'sink': data.shiftRequirements[period] };
       }
     }
     graph[name] = adjList;

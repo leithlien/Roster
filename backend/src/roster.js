@@ -31,13 +31,14 @@ const createNewEmployee = ( name ) => {
   setData(data);
 }
 
-const setEmployeeAvailability = ( name, availabilities ) => {
+const setEmployeeAvailability = ( name, maxShifts, availabilities ) => {
   if (!name || name === '') {
     throw HTTPError(400, 'Invalid name')
   }
 
   const data = getData();
 
+  data.employees[name].maxShifts = maxShifts;
   data.employees[name].availabilities = availabilities;
 
   setData(data);

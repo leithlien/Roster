@@ -45,8 +45,8 @@ app.post('/roster/adduser', (req, res) => {
 })
 
 app.put('/user/setavailability', (req, res) => {
-  const { name, availabilities } = req.body;
-  return res.json(setEmployeeAvailability(name, availabilities));
+  const { name, maxShifts, availabilities } = req.body;
+  return res.json(setEmployeeAvailability(name, maxShifts, availabilities));
 })
 
 app.put('roster/setrequirements', (req, res) => {
