@@ -78,7 +78,7 @@ Feature Set 1.2: Interactive UI
   - Prepopulated with the current values.
   - Same grid as 1.1, except with an input that takes in a number.
   - Confirmation and cancelation button.
-- Button that opens up a modal to change a persons availabilities:
+- Button(s) (per person) that opens up a modal to change a persons availabilities:
   - Prepopulated with their current availabilities.
   - Same grid as 1.1, except with a checkbox that indicates availability.
   - An input that takes in a number indicating how many shifts they would like to work.
