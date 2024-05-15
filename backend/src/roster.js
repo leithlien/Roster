@@ -17,10 +17,12 @@ const createNewEmployee = ( name ) => {
 
   const newEmployee = {};
 
+  newEmployee.maxShifts = 0;
+
   days.forEach(d => {
     periods.forEach(p => {
       const periodName = `${d}-${p}`
-      newEmployee[periodName] = false;
+      newEmployee.availabilities[periodName] = false;
     })
   });
 
@@ -36,7 +38,7 @@ const setEmployeeAvailability = ( name, availabilities ) => {
 
   const data = getData();
 
-  data.employees[name] = availabilities;
+  data.employees[name].availabilities = availabilities;
 
   setData(data);
 }

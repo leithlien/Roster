@@ -8,13 +8,13 @@ const solveFlow = () => {
   const graph = {};
   const source = {};
 
-  for (const [name, periods] of Object.entries(data.employees)) {
-    source[name] = INF;
+  for (const [name, employeeData] of Object.entries(data.employees)) {
+    source[name] = employeeData.maxShifts;
     const adjList = {};
-    for (const [period, value] of Object.entries(periods)) {
+    for (const [period, value] of Object.entries(employeeData.availabilities)) {
       if (value) {
         adjList[period] = 1;
-        graph[period] = { 'sink': 1 };
+        graph[period] = { 'sink': data.rosterRequirements[period] };
       }
     }
     graph[name] = adjList;
