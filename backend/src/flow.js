@@ -1,5 +1,7 @@
 import { getData, setData } from "./database.js"
 
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
 const solveFlow = () => {
   const data = getData();
   const graph = {};
@@ -7,18 +9,33 @@ const solveFlow = () => {
 
   for (const [name, employeeData] of Object.entries(data.employees)) {
     source[name] = employeeData.maxShifts;
+
     const adjList = {};
+    for (const day of days) {
+      const nameDay = `${name}-${day}`;
+      adjList[nameDay] = 1;
+    }
+    graph[name] = adjList;
+
     for (const [period, value] of Object.entries(employeeData.availabilities)) {
       if (value) {
-        adjList[period] = 1;
+        const day = period.split('-')[0];
+        if (!(graph[`${name}-${day}`])) {
+          graph[`${name}-${day}`] = {};
+        }
+        graph[`${name}-${day}`][period] = 1;
         graph[period] = { 'sink': data.shiftRequirements[period] };
       }
     }
-    graph[name] = adjList;
   }
+
   graph['source'] = source;
 
   const res = fordFulkerson(graph, 'source', 'sink');
+
+  Object.entries(data.roster).map(([period, employees]) => {
+    data.roster[period] = [];
+  });
 
   res.matching.forEach(([name, period]) => {
     data.roster[period] = [];
@@ -26,7 +43,7 @@ const solveFlow = () => {
       data.roster[period].push(name);
     }
   })
-
+  console.log(res.matching)
   setData(data);
 }
 

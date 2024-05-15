@@ -15,9 +15,10 @@ const createNewEmployee = ( name ) => {
 
   const data = getData();
 
-  const newEmployee = {};
-
-  newEmployee.maxShifts = 0;
+  const newEmployee = {
+    maxShifts: 0,
+    availabilities: {}
+  };
 
   days.forEach(d => {
     periods.forEach(p => {
@@ -45,6 +46,9 @@ const setEmployeeAvailability = ( name, maxShifts, availabilities ) => {
 }
 
 const setShiftRequirements = ( requirements ) => {
+  const data = getData();
+
+  data.shiftRequirements = requirements;
   return;
 }
 

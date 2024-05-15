@@ -12,7 +12,6 @@
   align-items: center;
   width: 1200px;
   height: 500px;
-  border: 1px solid black;
 }
 
 .roster-column {
@@ -57,4 +56,15 @@
 
 .toggle-container {
   width: 200px;
+}
+
+.availabilities-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.max-shift-input {
+  width: 10%;
 }
