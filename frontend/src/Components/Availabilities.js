@@ -11,6 +11,17 @@ function Availabilities () {
   let maxShifts = 0;
   const { name } = useParams();
   const [availabilities, setAvailabilities] = React.useState({});
+  const [roster, setRoster] = React.useState(null);
+  coonst [rerender, setRerender] = React.useState(false);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get('http://localhost:3000/roster');
+      setRoster(data.data);
+    }
+
+    fetchData();
+  }, [])
 
   const handleChange = (e) => {
     maxShifts = e.target.value;
@@ -39,39 +50,53 @@ function Availabilities () {
   const handleCheck = (d, p, e) => {
     setAvailabilities(prevState => ({
       ...prevState,
-      [`${d}-${p}`]: !prevState[`${d}-${p}`] 
+      [`${d}-${p}`]: !prevState[`${d}-${p}`]
     }));
+
   }
 
   const alreadyChecked = (d, p) => {
-    return availabilities[`${d}-${p}`];
+    if (!rerender) {
+      setRerender(true);
+      return roster.employees[name].availabilities[`${d}-${p}`];
+    }
+    
   }
+
+  console.log('rerender')
 
   return (
     <>
-      <div className='overlay'>
-        <div className='overlay-container'>
-          <div className='availabilities-container'>
-            <div className='roster-container'>
-              {
-                days.map(d => (
-                  <div key={d} className='roster-column'>
-                    {d}
-                    {
-                      periods.map(p => (
-                        <Checkbox key={p} className='roster-cell' checked={alreadyChecked(d, p)} onClick={(e) => { handleCheck(d, p, e) }} />
-                      ))
-                    }
-                  </div>
-                ))
-              }
+      {
+        roster === null ? (
+          <p>loading...</p>
+        ) : (
+          <div className='overlay'>
+            <div className='overlay-container'>
+              <div className='availabilities-container'>
+                <div className='roster-container'>
+                  {
+                    days.map(d => (
+                      <div key={d} className='roster-column'>
+                        {d}
+                        {
+                          periods.map(p => (
+                            <Checkbox key={p} className='roster-cell' checked={alreadyChecked(d, p)} onClick={(e) => { handleCheck(d, p, e) }} />
+                          ))
+                        }
+                      </div>
+                    ))
+                  }
+                </div>
+                <input className='max-shift-input' onChange={(e) => { handleChange(e) }}></input>
+              </div>
             </div>
-            <input className='max-shift-input' onChange={(e) => { handleChange(e) }}></input>
+            <Button className='toggle-container' variant="contained" onClick={goHome}>Toggle</Button>
+            <Button className='toggle-container' variant="contained" onClick={confirm}>Confirm</Button>
           </div>
-        </div>
-        <Button className='toggle-container' variant="contained" onClick={goHome}>Toggle</Button>
-        <Button className='toggle-container' variant="contained" onClick={confirm}>Confirm</Button>
-      </div>
+        )
+      }
+      
     </>
   )
 }
