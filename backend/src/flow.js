@@ -30,7 +30,7 @@ const solveFlow = () => {
   }
 
   graph['source'] = source;
-
+  console.log(graph);
   const res = fordFulkerson(graph, 'source', 'sink');
 
   Object.entries(data.roster).map(([period, employees]) => {
@@ -38,9 +38,10 @@ const solveFlow = () => {
   });
 
   res.matching.forEach(([name, period]) => {
-    data.roster[period] = [];
-    if (!(name === 'source' || period === 'sink')) {
-      data.roster[period].push(name);
+    if (period in data.roster) {
+      if (!(name === 'source' || period === 'sink')) {
+        data.roster[period].push(name.split('-')[0]);
+      }
     }
   })
   console.log(res.matching)
