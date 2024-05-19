@@ -15,16 +15,11 @@ function Home() {
   const fetchData = async () => {
     const data = await axios.get('http://localhost:3000/roster');
     setRoster(data.data);
-    console.log(data.data);
   }
 
   React.useEffect(() => {
     fetchData();
   }, [])
-
-  React.useEffect(() => {
-    console.log(roster);
-  }, [roster])
 
   const handleNameChange = (event) => {
     setName(event.target.value);
