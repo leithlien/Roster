@@ -9,7 +9,7 @@ function Home() {
   const [roster, setRoster] = React.useState(null);
   const [name, setName] = React.useState('');
 
-  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const periods = ['early', 'mid', 'late']
 
   const fetchData = async () => {
@@ -48,6 +48,14 @@ function Home() {
     navigate(`/${name}/availabilities`);
   }
 
+  const handleRequirements = () => {
+    navigate('/setrequirements');
+  }
+  
+  const abrev = (d) => {
+    return d.substring(0, 3).toLowerCase();
+  }
+
   return (
     <>
       {
@@ -55,9 +63,10 @@ function Home() {
           <p>loading...</p>
         ) : (
           <>
-            <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button>
-            <input value={name} onChange={handleNameChange} /> <br />
-            <Button variant="contained" onClick={handleReset}>Reset</Button>
+            <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button> &nbsp;
+            <input value={name} onChange={handleNameChange} /> &nbsp;
+            <Button variant="contained" onClick={handleRequirements}>Set Requirements</Button>
+            <br />
             <div className='name-buttons'>
               {
                 Object.keys(roster.employees).map(name => (
@@ -66,17 +75,21 @@ function Home() {
               }
             </div>
             <div className='roster-container'>
+              <div className='roster-column'>
+                Time
+                <div className='roster-cell time-cell'>Early</div>
+                <div className='roster-cell time-cell'>Mid</div>
+                <div className='roster-cell time-cell'>Late</div>
+              </div>
               {
                 days.map(d => (
-                  <div key={d} className='roster-column'>
+                  <div key={abrev(d)} className='roster-column'>
                     {d}
                     {
                       periods.map(p => (
                         <div key={p} className='roster-cell'>
-                          {`${d}-${p}`}
-                          {/* name rendering */}
                           { 
-                            roster.roster[`${d}-${p}`].map(n => (
+                            roster.roster[`${abrev(d)}-${p}`].map(n => (
                               <p key={n}>{n}</p>
                             ))
                           }
@@ -88,7 +101,8 @@ function Home() {
               }
             </div>
             
-            <Button variant="contained" onClick={solveRoster}>Solve</Button>
+            <Button variant="contained" onClick={solveRoster}>Solve</Button> <br /> <br />
+            <Button variant="contained" onClick={handleReset}>Reset</Button>
           </>
         )
       }

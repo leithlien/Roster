@@ -49,7 +49,7 @@ app.put('/user/setavailability', (req, res) => {
   return res.json(setEmployeeAvailability(name, maxShifts, availabilities));
 })
 
-app.put('roster/setrequirements', (req, res) => {
+app.put('/roster/setrequirements', (req, res) => {
   const { requirements } = req.body;
   return res.json(setShiftRequirements(requirements));
 })
