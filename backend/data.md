@@ -76,7 +76,7 @@ data = {
     'sun-mid': [],
     'sun-late': [],
   },
-  rosterRequirements: {
+  shiftRequirements: {
     'mon-early': 3,
     'mon-mid': 3,
     'mon-late': 3,

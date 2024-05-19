@@ -44,6 +44,7 @@ const solveFlow = () => {
     }
   })
   console.log(res.matching)
+  console.log(data.roster)
   setData(data);
 }
 

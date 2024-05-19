@@ -20,11 +20,17 @@ function Availabilities () {
 
   React.useEffect(() => {
     fetchData();
-    console.log('rerender');
   }, [])
 
-  const handleChange = (e) => {
-    setMaxShifts(e.target.value);
+  const handleChange = async (e) => {
+    await axios.put('http://localhost:3000/user/setavailability', 
+      {
+        name,
+        maxShifts: e.target.value,
+        availabilities: roster.employees[name].availabilities,
+      }
+    )
+    fetchData();
   }
 
   const goHome = () => {
