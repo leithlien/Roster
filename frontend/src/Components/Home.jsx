@@ -4,6 +4,8 @@ import '../App.css';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
+import homeStyles from './Home.module.css';
+
 function Home() {
   const navigate = useNavigate();
   const [roster, setRoster] = React.useState(null);
@@ -62,18 +64,25 @@ function Home() {
         roster === null ? (
           <p>loading...</p>
         ) : (
-          <>
-            <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button> &nbsp;
-            <input value={name} onChange={handleNameChange} /> &nbsp;
-            <Button variant="contained" onClick={handleRequirements}>Set Requirements</Button>
-            <br />
-            <div className='name-buttons'>
+          <div className={homeStyles['page-container']}>
+
+            <div className={homeStyles['button-container']}>
+              <Button variant="contained" onClick={handleRequirements}>Set Requirements</Button>
+            </div>
+
+            <div className={homeStyles['button-container']}>
+              <Button variant="contained" onClick={handleAddEmployee}>Add Person</Button> &nbsp;
+              <input value={name} onChange={handleNameChange} placeholder='name'/>
+            </div>
+            
+            <div className={homeStyles['button-container']}>
               {
                 Object.keys(roster.employees).map(name => (
-                  <Button key={name} variant="contained" onClick={() => { handleUserAvailabilities(name) }}>{name}</Button>
+                  <Button className={homeStyles['name-buttons']} key={name} variant="contained" onClick={() => { handleUserAvailabilities(name) }}>{name}</Button>
                 ))
               }
             </div>
+
             <div className='roster-container'>
               <div className='roster-column'>
                 Time
@@ -103,7 +112,7 @@ function Home() {
             
             <Button variant="contained" onClick={solveRoster}>Solve</Button> <br /> <br />
             <Button variant="contained" onClick={handleReset}>Reset</Button>
-          </>
+          </div>
         )
       }
       

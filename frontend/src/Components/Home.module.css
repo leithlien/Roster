@@ -1,0 +1,20 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.button-container {
+  display: flex;
+  width: 80%;
+  height: 40px;
+  margin: 10px;
+}
+
+.name-buttons {
+  width: 100px;
+  margin: 1px;
+}
