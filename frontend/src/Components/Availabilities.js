@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import overlayStyles from './Overlay.module.css';
+import rosterStyles from './Roster.module.css';
+
 function Availabilities () {
   const navigate = useNavigate();
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -62,27 +65,27 @@ function Availabilities () {
         roster === null ? (
           <p>loading...</p>
         ) : (
-          <div className='overlay'>
-            <div className='overlay-container'>
-              <div className='availabilities-container'>
-                <div className='roster-container'>
+          <div className={overlayStyles['overlay']}>
+            <div className={overlayStyles['overlay-container']}>
+              <div className={overlayStyles['availabilities-container']}>
+                <div className={rosterStyles['roster-container']}>
                   {
                     days.map(d => (
-                      <div key={d} className='roster-column'>
+                      <div key={d} className={rosterStyles['roster-column']}>
                         {d}
                         {
                           periods.map(p => (
-                            <Checkbox key={p} className='roster-cell' checked={alreadyChecked(d, p)} onClick={(e) => { handleCheck(d, p, e) }} />
+                            <Checkbox key={p} className={rosterStyles['roster-cell']} checked={alreadyChecked(d, p)} onClick={(e) => { handleCheck(d, p, e) }} />
                           ))
                         }
                       </div>
                     ))
                   }
                 </div>
-                <input className='max-shift-input' value={maxShifts} onChange={(e) => { handleChange(e) }}></input>
+                <input className={overlayStyles['max-shift-input']} value={maxShifts} onChange={(e) => { handleChange(e) }}></input>
               </div>
             </div>
-            <Button className='toggle-container' variant="contained" onClick={goHome}>Toggle</Button>
+            <Button className={overlayStyles['toggle-container']} variant="contained" onClick={goHome}>Toggle</Button>
           </div>
         )
       }

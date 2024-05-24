@@ -5,14 +5,12 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
 import homeStyles from './Home.module.css';
+import Roster from './Roster';
 
 function Home() {
   const navigate = useNavigate();
   const [roster, setRoster] = React.useState(null);
   const [name, setName] = React.useState('');
-
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const periods = ['early', 'mid', 'late']
 
   const fetchData = async () => {
     const data = await axios.get('http://localhost:3000/roster');
@@ -54,10 +52,6 @@ function Home() {
     navigate('/setrequirements');
   }
   
-  const abrev = (d) => {
-    return d.substring(0, 3).toLowerCase();
-  }
-
   return (
     <>
       {
@@ -83,32 +77,7 @@ function Home() {
               }
             </div>
 
-            <div className='roster-container'>
-              <div className='roster-column'>
-                Time
-                <div className='roster-cell time-cell'>Early</div>
-                <div className='roster-cell time-cell'>Mid</div>
-                <div className='roster-cell time-cell'>Late</div>
-              </div>
-              {
-                days.map(d => (
-                  <div key={abrev(d)} className='roster-column'>
-                    {d}
-                    {
-                      periods.map(p => (
-                        <div key={p} className='roster-cell'>
-                          { 
-                            roster.roster[`${abrev(d)}-${p}`].map(n => (
-                              <p key={n}>{n}</p>
-                            ))
-                          }
-                        </div>
-                      ))
-                    }
-                  </div>
-                ))
-              }
-            </div>
+            <Roster roster={roster} />
             
             <Button variant="contained" onClick={solveRoster}>Solve</Button> <br /> <br />
             <Button variant="contained" onClick={handleReset}>Reset</Button>
